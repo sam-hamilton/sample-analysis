@@ -17,7 +17,9 @@ class SampleController extends Controller
      */
     public function index()
     {
-        //
+        return view('samples.index', [
+            'samples' => Sample::with(['test', 'user'])->paginate('5'),
+        ]);
     }
 
     /**

@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('samples.create')" :active="request()->routeIs('samples.create')">
                         {{ __('Analyse Sample') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('samples.index')" :active="request()->routeIs('samples.index')">
+                        {{ __('View Samples') }}
+                    </x-nav-link>
                 </div>
             </div>
 

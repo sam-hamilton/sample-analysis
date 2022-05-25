@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/samples', [SampleController::class, 'index'])->name('samples.index');
     Route::get('/samples/create', [SampleController::class, 'create'])->name('samples.create');
     Route::post('/samples/create', [SampleController::class, 'store'])->name('samples.store');
 });
