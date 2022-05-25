@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SampleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::get('/samples/create', [SampleController::class, 'create'])->name('samples.create');
+    Route::post('/samples/create', [SampleController::class, 'store'])->name('samples.store');
 });
 
 require __DIR__.'/auth.php';
