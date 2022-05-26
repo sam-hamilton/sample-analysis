@@ -36,7 +36,10 @@
                                     <div>{{ $sample->reading_two_name }}: {{ $sample->reading_two_value }}</div>
                                 </td>
                                 <td class="border-b border-slate-100 p-4 pl-8">{{ $sample->analysis_failed ? 'Failed' : 'Successful' }}</td>
-                                <td class="border-b border-slate-100 p-4 pl-8">{{ $sample->user->name }}</td>
+                                <td class="border-b border-slate-100 p-4 pl-8">
+                                    {{ $sample->user->name }}
+                                    <div class="text-gray-500">{{ $sample->created_at->diffForHumans(['short' => true]) }}</div>
+                                </td>
                             </tr>
                         @empty
                             <tr>
