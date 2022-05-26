@@ -29,7 +29,7 @@
                             <tr>
                                 <td class="border-b border-slate-100 p-4 pl-8">{{ $sample->id }}</td>
                                 <td class="border-b border-slate-100 p-4 pl-8">{{ $sample->test->type }}</td>
-                                <td class="border-b border-slate-100 p-4 pl-8"><img class="max-w-xs" src="data:image/{{ Illuminate\Support\Str::afterLast($sample->test_strip, '.') }};base64, {{ base64_encode(\Illuminate\Support\Facades\Storage::get($sample->test_strip)) }}"></td>
+                                <td class="border-b border-slate-100 p-4 pl-8"><a href="{{ asset('storage/' . $sample->test_strip) }}" target="_blank" title="test strip image" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">view image</a></td>
                                 <td class="border-b border-slate-100 p-4 pl-8">{{ $sample->result }}</td>
                                 <td class="border-b border-slate-100 p-4 pl-8">
                                     <div>{{ $sample->reading_one_name }}: {{ $sample->reading_one_value }}</div>
