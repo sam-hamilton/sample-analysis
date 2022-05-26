@@ -48,7 +48,7 @@ class SampleController extends Controller
         ]);
 
         $test = Test::find($request->input('test_type'));
-        $path = $request->file('test_strip')->store($test->type);
+        $path = $request->file('test_strip')->store($test->type, ['disk' => 'public']);
 
         $sample = Sample::create([
             'user_id' => auth()->user()->id,
@@ -57,7 +57,7 @@ class SampleController extends Controller
         ]);
 
         $response = Http::withToken($test->analysis_service_token)
-            ->attach('image', Storage::get($sample->test_strip), basename($sample->test_strip))
+            ->attach('image', Storage::disk('public')->get($sample->test_strip), basename($sample->test_strip))
             ->post($test->analysis_service . $sample->id, [
                 'test_type' => $test->type,
             ])->json();
