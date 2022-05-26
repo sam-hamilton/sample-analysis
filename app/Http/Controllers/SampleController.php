@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sample;
 use App\Models\Test;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -15,10 +16,26 @@ class SampleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('samples.index', [
-            'samples' => Sample::with(['test', 'user'])->paginate('5'),
+            'samples' => Sample::query()
+                ->with(['test', 'user'])
+                ->when($request->filled('type'), function($query) use ($request) {
+                    return $query->where('test_id', $request->query('type'));
+                })
+                ->when($request->filled('outcome'), function($query) use ($request) {
+                    return $query->where('result', $request->query('outcome'));
+                })
+                ->when($request->filled('user'), function($query) use ($request) {
+                    return $query->where('user_id', $request->query('user'));
+                })
+                ->paginate('5'),
+            'filters' => [
+                'types' => Test::pluck('type', 'id'),
+                'outcomes' => Sample::pluck('result' )->unique(),
+                'users' => User::pluck('name', 'id')
+            ],
         ]);
     }
 

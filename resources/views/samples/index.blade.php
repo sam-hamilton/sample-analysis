@@ -7,6 +7,39 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-5 flex place-content-end">
+                <form method="GET" action="{{ request()->url() }}">
+                    <label for="type">Test type:</label>
+                    <select name="type" id="type" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="">All</option>
+                        @foreach($filters['types'] as $id => $type)
+                            <option value="{{ $id }}" @if(request()->query('type') == $id) selected @endif>{{ $type }}</option>
+                        @endforeach
+                    </select>
+
+                    <label for="outcome" class="ml-3">Outcome:</label>
+                    <select name="outcome" id="outcome" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="">All</option>
+                        @foreach($filters['outcomes'] as $outcome)
+                            <option value="{{ $outcome }}" @if(request()->query('outcome') == $outcome) selected @endif>{{ $outcome }}</option>
+                        @endforeach
+                    </select>
+
+                    <label for="user" class="ml-3">User:</label>
+                    <select name="user" id="user" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="">All</option>
+                        @foreach($filters['users'] as $id => $user)
+                            <option value="{{ $id }}" @if(request()->query('user') == $id) selected @endif>{{ $user }}</option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit" class="ml-3 mt-5 px-4 py-3 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
+                        Filter
+                    </button>
+
+                    <a href="{{ route(request()->route()->getName()) }}" class="ml-3 mt-5 px-1 py-3 border border-transparent rounded-md font-semibold text-xs text-red-500 uppercase tracking-widest hover:underline disabled:opacity-25 transition ease-in-out duration-150">Clear filters</a>
+                </form>
+            </div>
             <div class="mb-3">
                 {{ $samples->links() }}
             </div>
@@ -43,7 +76,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">There are no samples available.</td>
+                                <td colspan="7">There are no samples available.</td>
                             </tr>
                         @endforelse
                         </tbody>
