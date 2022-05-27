@@ -92,7 +92,7 @@ class SampleController extends Controller
             // @todo Sample uploaded but no analysis is available
         }
 
-        return redirect()->route('samples.create');
+        return redirect()->route('samples.index');
     }
 
     /**

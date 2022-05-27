@@ -59,7 +59,7 @@ class CreateSampleTest extends TestCase
         $this->assertEquals(1, Sample::count());
 
          tap(Sample::first(), function ($sample) use ($response, $test, $user) {
-             $response->assertRedirect('/samples/create');
+             $response->assertRedirect('/samples');
 
              $this->assertTrue($sample->test->is($test));
              $this->assertTrue($sample->user->is($user));
