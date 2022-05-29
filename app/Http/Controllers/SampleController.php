@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Analysis\AwsAnalysisService;
 use App\Models\Sample;
 use App\Models\Test;
 use App\Models\User;
@@ -74,24 +75,8 @@ class SampleController extends Controller
             'test_strip' => $path,
         ]);
 
-        $response = Http::withToken($test->analysis_service_token)
-            ->attach('image', Storage::disk('public')->get($sample->test_strip), basename($sample->test_strip))
-            ->post($test->analysis_service . $sample->id, [
-                'test_type' => $test->type,
-            ])->json();
+        $analysis = (new AwsAnalysisService($sample))->analyse()->save();
 
-        if(! is_null($response)) {
-            $sample->fill([
-                'result' => $response['data']['result'],
-                'analysis_failed' => $response['data']['failed'],
-                'reading_one_name' => $response['data']['readings'][0]['name'],
-                'reading_one_value' => $response['data']['readings'][0]['value'],
-                'reading_two_name' => $response['data']['readings'][1]['name'],
-                'reading_two_value' => $response['data']['readings'][1]['value'],
-            ])->save();
-        } else {
-            // @todo Sample uploaded but no analysis is available
-        }
         flash()->success('Your sample has been successfully uploaded');
 
         return redirect()->route('samples.index');
