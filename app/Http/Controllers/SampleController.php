@@ -30,6 +30,7 @@ class SampleController extends Controller
                 ->when($request->filled('user'), function($query) use ($request) {
                     return $query->where('user_id', $request->query('user'));
                 })
+                ->orderByDesc('created_at')
                 ->paginate('5'),
             'filters' => [
                 'types' => Test::pluck('type', 'id'),
