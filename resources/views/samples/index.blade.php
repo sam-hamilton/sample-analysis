@@ -7,6 +7,13 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            @if (flash()->message)
+                <div class="{{ flash()->class }}">
+                    {{ flash()->message }}
+                </div>
+            @endif
+
             <div class="mb-5 flex place-content-end">
                 <form method="GET" action="{{ request()->url() }}">
                     <label for="type">Test type:</label>

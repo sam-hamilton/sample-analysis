@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\FlashServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -1,3 +1,15 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+    .alert-success {
+        @apply p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg;
+    }
+    .alert-warning {
+        @apply p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg;
+    }
+    .alert-error {
+        @apply p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg;
+    }
+}

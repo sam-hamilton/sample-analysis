@@ -92,6 +92,7 @@ class SampleController extends Controller
         } else {
             // @todo Sample uploaded but no analysis is available
         }
+        flash()->success('Your sample has been successfully uploaded');
 
         return redirect()->route('samples.index');
     }
