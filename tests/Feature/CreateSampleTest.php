@@ -66,7 +66,7 @@ class CreateSampleTest extends TestCase
              $this->assertStringContainsString($test->type, $sample->test_strip);
              $this->assertStringContainsString('.jpg', $sample->test_strip);
              $this->assertNotNull($sample->result);
-             $this->assertIsBool((boolean) $sample->analysis_failed);
+             $this->assertIsBool($sample->analysis_failed);
              $this->assertNotNull($sample->reading_one_name);
              $this->assertNotNull($sample->reading_one_value);
              $this->assertNotNull($sample->reading_two_name);

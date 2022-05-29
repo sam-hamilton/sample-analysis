@@ -11,6 +11,10 @@ class Sample extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'analysis_failed' => 'boolean',
+    ];
+
     public function test()
     {
         return $this->belongsTo(Test::class);
