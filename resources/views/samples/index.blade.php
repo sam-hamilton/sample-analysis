@@ -65,10 +65,18 @@
                                 <td class="border-b border-slate-100 p-4 pl-8"><a href="{{ asset('storage/' . $sample->test_strip) }}" target="_blank" title="test strip image" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">view image</a></td>
                                 <td class="border-b border-slate-100 p-4 pl-8">{{ $sample->result }}</td>
                                 <td class="border-b border-slate-100 p-4 pl-8">
-                                    <div>{{ $sample->reading_one_name }}: {{ $sample->reading_one_value }}</div>
-                                    <div>{{ $sample->reading_two_name }}: {{ $sample->reading_two_value }}</div>
+                                    @if(! is_null($sample->reading_one_value))
+                                        <div>{{ $sample->reading_one_name }}: {{ $sample->reading_one_value }}</div>
+                                    @endif
+                                    @if(! is_null($sample->reading_two_value))
+                                        <div>{{ $sample->reading_two_name }}: {{ $sample->reading_two_value }}</div>
+                                    @endif
                                 </td>
-                                <td class="border-b border-slate-100 p-4 pl-8">{{ $sample->analysis_failed ? 'Failed' : 'Successful' }}</td>
+                                <td class="border-b border-slate-100 p-4 pl-8">
+                                    @if(! is_null($sample->analysis_failed))
+                                        {{ $sample->analysis_failed ? 'Failed' : 'Successful' }}
+                                    @endif
+                                </td>
                                 <td class="border-b border-slate-100 p-4 pl-8">
                                     {{ $sample->user->name }}
                                     <div class="text-gray-500">{{ $sample->created_at->diffForHumans(['short' => true]) }}</div>
