@@ -32,7 +32,8 @@ class SampleController extends Controller
                     return $query->where('user_id', $request->query('user'));
                 })
                 ->orderByDesc('created_at')
-                ->paginate('5'),
+                ->paginate('5')
+                ->withQueryString(),
             'filters' => [
                 'types' => Test::pluck('type', 'id'),
                 'outcomes' => Sample::pluck('result' )->unique(),
