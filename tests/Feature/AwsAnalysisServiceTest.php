@@ -46,7 +46,6 @@ class AwsAnalysisServiceTest extends TestCase
         $this->assertIsArray($response['data']);
         $this->assertArrayHasKey('failed', $response['data']);
         $this->assertArrayHasKey('readings', $response['data']);
-        $this->assertArrayHasKey('readings', $response['data']);
         $this->assertIsArray($response['data']['readings']);
         foreach ($response['data']['readings'] as $reading) {
             $this->assertArrayHasKey('name', $reading);
