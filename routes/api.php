@@ -17,3 +17,22 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/analysis/{id}', function (Request $request) {
+    return [
+        'data' => [
+            'result' => 'Positive',
+            'failed' => false,
+            'readings' => [
+                [
+                    'name' => 'control',
+                    'value' => 1
+                ],
+                [
+                    'name' => 'detect',
+                    'value' => rand(1, 100) / 100
+                ]
+            ],
+        ]
+    ];
+});
