@@ -24,8 +24,8 @@ class AwsAnalysisServiceTest extends TestCase
         parent::setUp();
 
         $this->test = Test::create([
-            'type' => 'talvitis',
-            'analysis_service' => 'https://bwsho71wt6.execute-api.eu-west-2.amazonaws.com/api/tests/analyse/',
+            'type' => 'diabetes',
+            'analysis_service' => env('APP_URL') . '/api/analysis/',
             'analysis_service_token' => 'xqvzfFppKgFZ3LU8iKbCngOpBdRW2D2d',
         ]);
 
